@@ -1,0 +1,304 @@
+.Polaris-Tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Polaris-Tabs__Wrapper {
+  border-bottom: 0.1rem solid rgba(202, 204, 207, 1);
+  padding: 0 0.8rem;
+}
+
+.Polaris-Tabs--fitted {
+  flex-wrap: nowrap;
+}
+
+.Polaris-Tabs--fitted .Polaris-Tabs__TabContainer {
+  flex: 1 1 100%;
+}
+
+.Polaris-Tabs--fitted .Polaris-Tabs__Title {
+  width: 100%;
+  padding: 0.8rem 1.6rem;
+}
+
+.Polaris-Tabs--fillSpace .Polaris-Tabs__TabContainer {
+  flex: 1 1 auto;
+}
+
+.Polaris-Tabs__TabContainer {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.Polaris-Tabs__Tab {
+  text-decoration: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 2rem;
+  text-transform: initial;
+  letter-spacing: initial;
+  color: $p-text;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  min-width: 100%;
+  margin-top: 0.1rem;
+  margin-bottom: -0.1rem;
+  padding: 0.8rem 0.4rem;
+  outline: none;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.Polaris-Tabs__Tab:visited {
+  color: inherit;
+  > .Polaris-Tabs__Title {
+    color: inherit;
+  }
+}
+
+.Polaris-Tabs__Tab:focus {
+  outline: none;
+}
+
+@media (min-width: 40em) {
+  .Polaris-Tabs__Tab {
+    font-size: 1.4rem;
+  }
+}
+
+.Polaris-Tabs__Tab:hover {
+  text-decoration: none;
+}
+
+.Polaris-Tabs__Tab:hover .Polaris-Tabs__Title,
+.Polaris-Tabs__Tab.Polaris-Tabs__Tab--selected:hover .Polaris-Tabs__Title {
+  font-weight: 400;
+  color: $p-text;
+  background-color: transparent;
+}
+
+.Polaris-Tabs__Tab:hover .Polaris-Tabs__Title::before {
+  background-color: $p-action-primary;
+}
+
+.Polaris-Tabs__Tab:active .Polaris-Tabs__Title {
+  background-color: transparent;
+}
+
+.Polaris-Tabs__Tab:active .Polaris-Tabs__Title::before {
+  background: $p-surface-primary-selected-pressed;
+}
+
+.Polaris-Tabs__Tab:focus .Polaris-Tabs__Title,
+.Polaris-Tabs__Tab.Polaris-Tabs__Tab--selected .Polaris-Tabs__Title {
+  font-weight: 400;
+  color: $p-success;
+}
+
+.Polaris-Tabs__Tab:focus:not(:active) .Polaris-Tabs__Title::after {
+  //box-shadow: 0 0 0 0.2rem $p-focused;
+  outline: 0.1rem solid transparent;
+}
+
+.Polaris-Tabs__Tab--selected {
+  font-weight: 400;
+  color: $p-text;
+}
+
+.Polaris-Tabs__Tab--selected:focus .Polaris-Tabs__Title {
+  outline: 0.3rem solid transparent;
+}
+
+.Polaris-Tabs__Tab--selected:focus .Polaris-Tabs__Title::before {
+  background: $p-action-primary;
+}
+
+.Polaris-Tabs__Tab--selected .Polaris-Tabs__Title {
+  outline: 0.3rem solid transparent;
+  color: $p-success;
+}
+
+.Polaris-Tabs__Tab--selected .Polaris-Tabs__Title::before {
+  background: $p-action-primary;
+}
+
+.Polaris-Tabs__Title {
+  position: relative;
+  border-radius: $p-border-radius-base;
+  display: block;
+  padding: 0.8rem 1.6rem;
+  min-width: 5rem;
+  color: $p-text-subdued;
+}
+
+.Polaris-Tabs__Title::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -0.1rem;
+  right: -0.1rem;
+  bottom: -0.1rem;
+  left: -0.1rem;
+  display: block;
+  pointer-events: none;
+  //box-shadow: 0 0 0 -0.1rem $p-focused;
+  transition: box-shadow 100ms $p-ease;
+  border-radius: calc(0.4rem + 0.1rem);
+}
+
+.Polaris-Tabs__Title::before {
+  content: '';
+  position: absolute;
+  bottom: -0.8rem;
+  left: 1.6rem;
+  right: 1.6rem;
+  height: 0.3rem;
+}
+
+.Polaris-Tabs--titleWithIcon {
+  display: flex;
+}
+
+.Polaris-Tabs__Panel {
+  display: block;
+}
+
+.Polaris-Tabs__Panel:focus {
+  outline: none;
+}
+
+.Polaris-Tabs__Panel--hidden {
+  display: none;
+}
+
+.Polaris-Tabs__List {
+  list-style: none;
+  margin: 0;
+  padding: 0.8rem;
+}
+
+.Polaris-Tabs__Item {
+  color: inherit;
+  text-decoration: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 1.6rem;
+  padding: 0.8rem 1.6rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: $p-border-radius-base;
+}
+
+.Polaris-Tabs__Item:visited {
+  color: inherit;
+}
+
+.Polaris-Tabs__Item:focus {
+  outline: none;
+}
+
+.Polaris-Tabs__Item::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -0.1rem;
+  right: -0.1rem;
+  bottom: -0.1rem;
+  left: -0.1rem;
+  display: block;
+  pointer-events: none;
+  //box-shadow: 0 0 0 -0.1rem $p-focused;
+  transition: box-shadow 100ms $p-ease;
+  border-radius: calc(0.4rem + 0.1rem);
+}
+
+.Polaris-Tabs__Item::-moz-focus-inner {
+  border: none;
+}
+
+.Polaris-Tabs__Item:hover {
+  background-color: $p-surface-hovered;
+}
+
+.Polaris-Tabs__Item:active {
+  background-color: $p-surface-primary-selected-pressed;
+}
+
+.Polaris-Tabs__Item:focus:not(:active)::after {
+  //box-shadow: 0 0 0 0.2rem $p-focused;
+  outline: 0.1rem solid transparent;
+}
+
+.Polaris-Tabs__DisclosureTab {
+  display: none;
+}
+
+.Polaris-Tabs__DisclosureTab--visible {
+  display: flex;
+}
+
+.Polaris-Tabs__DisclosureActivator {
+  position: relative;
+  height: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  margin: 0.1rem 0.1rem -0.1rem 0;
+}
+
+.Polaris-Tabs__DisclosureActivator::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -0.1rem;
+  right: -0.1rem;
+  bottom: -0.1rem;
+  left: -0.1rem;
+  display: block;
+  pointer-events: none;
+  //box-shadow: 0 0 0 -0.1rem $p-focused;
+  transition: box-shadow 100ms $p-ease;
+  border-radius: calc(0.4rem + 0.1rem);
+}
+
+.Polaris-Tabs__DisclosureActivator:hover svg, .Polaris-Tabs__DisclosureActivator:focus svg {
+  fill: $p-icon;
+}
+
+.Polaris-Tabs__DisclosureActivator:focus .Polaris-Tabs__Title::after {
+  //box-shadow: 0 0 0 0.2rem $p-focused;
+  outline: 0.1rem solid transparent;
+}
+
+.Polaris-Tabs__DisclosureActivator:hover .Polaris-Tabs__Title::before {
+  background-color: $p-border-hovered;
+}
+
+.Polaris-Tabs__TabMeasurer {
+  display: flex;
+  visibility: hidden;
+  height: 0;
+}

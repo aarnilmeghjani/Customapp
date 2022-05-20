@@ -1,0 +1,300 @@
+.Polaris-OptionList-Checkbox {
+  position: relative;
+  width: 100%;
+  margin: $p-choice-margin;
+}
+
+.Polaris-OptionList-Checkbox.Polaris-OptionList-Checkbox--active .Polaris-OptionList-Checkbox__Backdrop::after {
+  box-shadow: 0 0 0 0.2rem $p-focused;
+  outline: 0.1rem solid transparent;
+}
+
+.Polaris-OptionList-Checkbox__Input {
+  position: absolute !important;
+  top: 0;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  overflow: hidden !important;
+  height: 1px !important;
+  width: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+.Polaris-OptionList-Checkbox__Input.Polaris-OptionList-Checkbox--keyFocused + .Polaris-OptionList-Checkbox__Backdrop::after {
+  box-shadow: 0 0 0 0.2rem $p-focused;
+  outline: 0.1rem solid transparent;
+}
+
+.Polaris-OptionList-Checkbox__Input:active:not(:disabled) + .Polaris-OptionList-Checkbox__Backdrop, .Polaris-OptionList-Checkbox__Input:checked + .Polaris-OptionList-Checkbox__Backdrop, .Polaris-OptionList-Checkbox__Input.Polaris-OptionList-Checkbox__Input--indeterminate + .Polaris-OptionList-Checkbox__Backdrop {
+  border-color: $p-interactive;
+}
+
+.Polaris-OptionList-Checkbox__Input:active:not(:disabled) + .Polaris-OptionList-Checkbox__Backdrop::before, .Polaris-OptionList-Checkbox__Input:checked + .Polaris-OptionList-Checkbox__Backdrop::before, .Polaris-OptionList-Checkbox__Input.Polaris-OptionList-Checkbox__Input--indeterminate + .Polaris-OptionList-Checkbox__Backdrop::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (-ms-high-contrast: active) {
+  .Polaris-OptionList-Checkbox__Input:active:not(:disabled) + .Polaris-OptionList-Checkbox__Backdrop::before, .Polaris-OptionList-Checkbox__Input:checked + .Polaris-OptionList-Checkbox__Backdrop::before, .Polaris-OptionList-Checkbox__Input.Polaris-OptionList-Checkbox__Input--indeterminate + .Polaris-OptionList-Checkbox__Backdrop::before {
+    border: 2px solid windowText;
+  }
+}
+
+.Polaris-OptionList-Checkbox__Input:active:not(:disabled) ~ .Polaris-OptionList-Checkbox__Icon, .Polaris-OptionList-Checkbox__Input:checked ~ .Polaris-OptionList-Checkbox__Icon, .Polaris-OptionList-Checkbox__Input.Polaris-OptionList-Checkbox__Input--indeterminate ~ .Polaris-OptionList-Checkbox__Icon {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  transition: opacity $p-duration-1-5-0 $p-ease, transform $p-duration-1-5-0 $p-ease;
+}
+
+.Polaris-OptionList-Checkbox__Input:disabled + .Polaris-OptionList-Checkbox__Backdrop {
+  border-color: $p-border-disabled;
+}
+
+.Polaris-OptionList-Checkbox__Input:disabled + .Polaris-OptionList-Checkbox__Backdrop::before {
+  background-color: $p-action-secondary-disabled;
+}
+
+.Polaris-OptionList-Checkbox__Input:disabled + .Polaris-OptionList-Checkbox__Backdrop:hover {
+  cursor: default;
+}
+
+.Polaris-OptionList-Checkbox__Input:disabled:checked + .Polaris-OptionList-Checkbox__Backdrop, .Polaris-OptionList-Checkbox__Input:disabled:checked + .Polaris-OptionList-Checkbox__Backdrop::before {
+  background: $p-border-disabled;
+}
+
+.Polaris-OptionList-Checkbox__Backdrop {
+  position: relative;
+  border: $p-control-border-width solid $p-border;
+  background-color: $p-surface;
+  border-radius: $p-border-radius-base;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.Polaris-OptionList-Checkbox__Backdrop::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * 0.2rem);
+  right: calc(-1 * 0.2rem);
+  bottom: calc(-1 * 0.2rem);
+  left: calc(-1 * 0.2rem);
+  border-radius: $p-border-radius-base;
+  background-color: $p-interactive;
+  opacity: 0;
+  transform: scale(0.25);
+  transition: opacity $p-duration-1-0-0 $p-ease, transform $p-duration-1-0-0 $p-ease;
+}
+
+.Polaris-OptionList-Checkbox__Backdrop.Polaris-OptionList-Checkbox--hover, .Polaris-OptionList-Checkbox__Backdrop:hover {
+  cursor: pointer;
+  border-color: var(--p-border-hovered);
+}
+
+.Polaris-OptionList-Checkbox__Backdrop::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: calc(-1 * (0.2rem + 0.1rem));
+  right: calc(-1 * (0.2rem + 0.1rem));
+  bottom: calc(-1 * (0.2rem + 0.1rem));
+  left: calc(-1 * (0.2rem + 0.1rem));
+  display: block;
+  pointer-events: none;
+  box-shadow: 0 0 0 calc(-1 * (0.2rem + 0.1rem)) $p-focused;
+  transition: box-shadow 100ms $p-ease;
+  border-radius: calc(0.4rem + 0.1rem);
+}
+
+.Polaris-OptionList-Checkbox__Icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.25);
+  opacity: 0;
+  transition: opacity $p-duration-1-0-0 $p-ease, transform $p-duration-1-0-0 $p-ease;
+}
+
+.Polaris-OptionList-Checkbox__Icon svg {
+  fill: $p-icon-on-interactive;
+}
+
+@media (-ms-high-contrast: active) {
+  .Polaris-OptionList-Checkbox__Icon {
+    fill: windowText;
+  }
+}
+
+.Polaris-OptionList-Option {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+  width: 100%;
+  min-height: 3.6rem;
+  text-align: left;
+  border-radius: $p-border-radius-base;
+  margin-top: 0.4rem;
+}
+
+.Polaris-OptionList-Option:focus {
+  outline: none;
+}
+
+.Polaris-OptionList-Option:visited {
+  color: inherit;
+}
+
+.Polaris-OptionList-Option__SingleSelectOption {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+}
+
+.Polaris-OptionList-Option__SingleSelectOption:focus {
+  outline: none;
+}
+
+.Polaris-OptionList-Option__SingleSelectOption::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: -0.1rem;
+  right: -0.1rem;
+  bottom: -0.1rem;
+  left: -0.1rem;
+  display: block;
+  pointer-events: none;
+  box-shadow: 0 0 0 -0.1rem $p-focused;
+  transition: box-shadow 100ms $p-ease;
+  border-radius: calc(0.4rem + 0.1rem);
+}
+
+.Polaris-OptionList-Option__SingleSelectOption.Polaris-OptionList-Option--focused:not(:active)::after {
+  // box-shadow: 0 0 0 0.2rem $p-focused;
+  outline: 0.1rem solid transparent;
+}
+
+.Polaris-OptionList-Option__SingleSelectOption.Polaris-OptionList-Option--active {
+  background: $p-surface-selected;
+}
+
+.Polaris-OptionList-Option__SingleSelectOption.Polaris-OptionList-Option--active::before, .Polaris-OptionList-Option__SingleSelectOption.Polaris-OptionList-Option--select::before {
+  content: '';
+  background-color: #007B5C;
+  position: absolute;
+  top: 0;
+  left: -0.8rem;
+  height: 100%;
+  display: block;
+  width: 0.3rem;
+  border-top-right-radius: $p-border-radius-base;
+  border-bottom-right-radius: $p-border-radius-base;
+}
+
+.Polaris-OptionList-Option__SingleSelectOption:not(.Polaris-OptionList-Option--disabled) {
+  color: inherit;
+}
+
+.Polaris-OptionList-Option__SingleSelectOption .Polaris-OptionList-Option__Media {
+  padding: 0 0.8rem 0 0;
+}
+
+.Polaris-OptionList-Option__Label, .Polaris-OptionList-Option__SingleSelectOption {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  cursor: pointer;
+  border-radius: $p-border-radius-base;
+  padding: 0.8rem;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.Polaris-OptionList-Option__Label:hover:not(.Polaris-OptionList-Option--disabled), .Polaris-OptionList-Option__SingleSelectOption:hover:not(.Polaris-OptionList-Option--disabled) {
+  background: $p-surface-hovered;
+  outline: 0.1rem solid transparent;
+}
+
+.Polaris-OptionList-Option__Label.Polaris-OptionList-Option--select, .Polaris-OptionList-Option__Label.Polaris-OptionList-Option--select:hover:not(.Polaris-OptionList-Option--disabled), .Polaris-OptionList-Option__Label:active:not(.Polaris-OptionList-Option--disabled), .Polaris-OptionList-Option__SingleSelectOption.Polaris-OptionList-Option--select, .Polaris-OptionList-Option__SingleSelectOption.Polaris-OptionList-Option--select:hover:not(.Polaris-OptionList-Option--disabled), .Polaris-OptionList-Option__SingleSelectOption:active:not(.Polaris-OptionList-Option--disabled) {
+  background: #f1f8f5;
+  outline: 0.1rem solid transparent;
+}
+
+.Polaris-OptionList-Option__Label.Polaris-OptionList-Option--disabled, .Polaris-OptionList-Option__SingleSelectOption.Polaris-OptionList-Option--disabled {
+  background: $p-surface-disabled;
+  cursor: default;
+  color: $p-text-disabled;
+}
+
+.Polaris-OptionList-Option__Checkbox {
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  width: $p-choice-size;
+  height: $p-choice-size;
+  margin-right: 0.8rem;
+  margin-left: calc(-1 * 0.1rem);
+}
+
+.Polaris-OptionList-Option--disabled .Polaris-OptionList-Option__Media svg {
+  fill: $p-icon-disabled;
+}
+
+.Polaris-OptionList-Option__Media {
+  padding: 0 0.8rem;
+}
+
+.Polaris-OptionList-Option__Media svg {
+  fill: $p-icon;
+}
+
+.Polaris-OptionList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding: 0.8rem;
+}
+
+.Polaris-OptionList__Options {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Polaris-OptionList__Title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.6rem;
+  text-transform: uppercase;
+  padding: 0.8rem;
+  color: $p-text-subdued;
+}
+
+@media (min-width: 40em) {
+  .Polaris-OptionList__Title {
+    font-size: 1.2rem;
+  }
+}

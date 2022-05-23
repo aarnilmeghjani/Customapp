@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -35,7 +36,28 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::first();
+
+        $product = $request->all();
+        $item = [];
+
+        for ($x = 0; $x < sizeof($product); $x++) {
+            $item[$x]['title'] = $product[$x]['title'];
+            $item[$x]['price'] = $product[$x]['variants'][0]['price'];
+        }
+
+        $data = [
+            'order' =>
+                [
+                    'line_items' => $item
+                ]
+        ];
+
+
+        $response = $user->api()->rest('POST', '/admin/api/2022-04/orders.json', $data);
+
+
+        return response('order created successfully', 200);
     }
 
     /**

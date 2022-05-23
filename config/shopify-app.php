@@ -197,7 +197,7 @@ return [
     |
     */
 
-    'api_scopes' => env('SHOPIFY_API_SCOPES', 'read_products,write_products'),
+    'api_scopes' => env('SHOPIFY_API_SCOPES', 'read_products,write_products,read_draft_orders,write_draft_orders,read_fulfillments,write_fulfillments,read_orders,write_orders,read_order_edits,write_order_edits'),
 
     /*
     |--------------------------------------------------------------------------
@@ -341,16 +341,16 @@ return [
     */
 
     'webhooks' => [
-        /*
-            [
-                'topic' => env('SHOPIFY_WEBHOOK_1_TOPIC', 'ORDERS_CREATE'),
-                'address' => env('SHOPIFY_WEBHOOK_1_ADDRESS', 'https://some-app.com/webhook/orders-create')
-            ], [
-                'topic' => env('SHOPIFY_WEBHOOK_2_TOPIC', 'APP_PURCHASES_ONE_TIME_UPDATE'),
-                'address' => env('SHOPIFY_WEBHOOK_2_ADDRESS', 'https://some-app.com/webhook/purchase'),
-            ]
-            ...
-        */
+        [
+            'topic' => 'ORDERS_CREATE',
+            'address' => 'https://6848-43-240-10-154.ngrok.io/webhook/orders-create'
+        ],
+        [
+            'topic' => 'ORDERS_FULFILLED',
+            'address' => 'https://6848-43-240-10-154.ngrok.io/webhook/orders-fulfilled'
+        ]
+
+
     ],
 
     /*

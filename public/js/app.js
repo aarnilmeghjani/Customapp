@@ -12508,6 +12508,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Master",
+  data: function data() {
+    return {
+      selected: {}
+    };
+  },
   beforeCreate: function beforeCreate() {
     var _this = this;
 
@@ -12518,12 +12523,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               queryStrings = _this.$route.query;
-              _this.app = _shopify_app_bridge__WEBPACK_IMPORTED_MODULE_1___default()({
+              _this.$root = _shopify_app_bridge__WEBPACK_IMPORTED_MODULE_1___default()({
                 apiKey: "5bfac15df6460a30622024370be61987",
                 host: queryStrings.host
               });
-              redirect = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Redirect.create(app);
-              console.log(_this.app); // redirect.dispatch(Redirect.Action.APP, '/home');
+              redirect = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Redirect.create(_this.$root);
+              console.log(_this.$root); // redirect.dispatch(Redirect.Action.APP, '/home');
 
             case 4:
             case "end":
@@ -12532,100 +12537,95 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     }))();
-  },
-  mounted: function mounted() {
-    var _this2 = this;
+  } // async mounted() {
+  //     this.$root.$toast = this.toastNotification;
+  // },
+  //
+  // created() {
+  //
+  //     // this.toastNotification('product created');
+  //     // this.button();
+  //     // this.resource();
+  //
+  //
+  //
+  // },
+  // watch: {
+  //     $route(to, from) {
+  //         const history = History.create(this.$root);
+  //         history.dispatch(History.Action.PUSH, to.path);
+  //
+  //
+  //     }
+  // },
+  // methods:{
+  //     toastNotification(message, isError = false, duration = 5000) {
+  //         const toastNotification = Toast.create(this.$root, {
+  //             message,
+  //             duration,
+  //             isError,
+  //         });
+  //         toastNotification.dispatch(Toast.Action.SHOW);
+  //     },
+  //     button(){
+  //         const myButton = Button.create(this.$root, {
+  //             label: 'Save'
+  //         });
+  //         myButton.dispatch(Button.Action.CLICK);
+  //         console.log(myButton);
+  //     },
+  //     resource(){
+  //         this.productPicker = ResourcePicker.create(this.$root, {
+  //             resourceType: ResourcePicker.ResourceType.Product,
+  //         });
+  //         this.productPicker.dispatch(ResourcePicker.Action.OPEN)
+  //         console.log(this.productPicker);
+  //         this.productPicker.subscribe(ResourcePicker.Action.SELECT,(selectPayload)=>{
+  //             this.modal();
+  //            this.selected = selectPayload.selection;
+  //         });
+  //
+  //     },
+  //     modal(){
+  //         const okButton = Button.create(this.$root, {label: 'Order Product'});
+  //         okButton.subscribe(Button.Action.CLICK, () => {
+  //             this.createOrder();
+  //
+  //         });
+  //         const cancelButton = Button.create(this.$root, {label: 'Cancel'});
+  //         cancelButton.subscribe(Button.Action.CLICK, () => {
+  //             this.myModal.dispatch(Modal.Action.CLOSE);
+  //         });
+  //
+  //         const modalOptions = {
+  //             title: 'Sure want to order',
+  //             message: 'Please confirm your order',
+  //             footer: {
+  //                 buttons: {
+  //                     primary: okButton,
+  //                     secondary: [cancelButton],
+  //                 },
+  //             },
+  //         };
+  //         this.myModal = Modal.create(this.$root, modalOptions);
+  //         this.myModal.dispatch(Modal.Action.OPEN);
+  //
+  //
+  //     },
+  //     createOrder() {
+  //         this.myModal.dispatch(Modal.Action.CLOSE);
+  //         try {
+  //             this.axios.post('api/order ', this.selected).then(res => {
+  //                 if (res.data === 'order created successfully') {
+  //                     this.toastNotification(res.data);
+  //                 }
+  //             })
+  //         } catch (e) {
+  //             console.log(e);
+  //         }
+  //     }
+  // }
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _this2.app.$toast = _this2.toastNotification;
-
-            case 1:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }))();
-  },
-  created: function created() {
-    this.toastNotification('product created');
-    this.button();
-    this.resource();
-  },
-  watch: {
-    $route: function $route(to, from) {
-      var history = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.History.create(app);
-      history.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.History.Action.PUSH, to.path);
-    }
-  },
-  methods: {
-    toastNotification: function toastNotification(message) {
-      var isError = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5000;
-      var toastNotification = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Toast.create(this.app, {
-        message: message,
-        duration: duration,
-        isError: isError
-      });
-      toastNotification.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Toast.Action.SHOW);
-    },
-    button: function button() {
-      var myButton = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Button.create(this.app, {
-        label: 'Save'
-      });
-      myButton.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Button.Action.CLICK);
-      console.log(myButton);
-    },
-    resource: function resource() {
-      var _this3 = this;
-
-      var productPicker = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.ResourcePicker.create(this.app, {
-        resourceType: _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.ResourcePicker.ResourceType.Product
-      });
-      productPicker.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.ResourcePicker.Action.OPEN);
-      console.log(productPicker);
-      productPicker.subscribe(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.ResourcePicker.Action.SELECT, function (selectPayload) {
-        _this3.modal();
-
-        var selection = selectPayload.selection;
-        console.log(selection);
-      }); // picker.subscribe(ResourcePicker.Action.CANCEL, () => {
-      //     // Picker was cancelled
-      // });
-      // picker.subscribe(ResourcePicker.Action.SELECT, (selectPayload) => {
-      //     const selection = selectPayload.selection;
-      //     // Do something with `selection`
-      // });
-    },
-    modal: function modal() {
-      var okButton = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Button.create(this.app, {
-        label: 'Order Product'
-      });
-      okButton.subscribe(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Button.Action.CLICK, function () {// Do something with the click action
-      });
-      var cancelButton = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Button.create(this.app, {
-        label: 'Cancel'
-      });
-      cancelButton.subscribe(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Button.Action.CLICK, function () {// Do something with the click action
-      });
-      var modalOptions = {
-        title: 'Sure want to order',
-        message: 'Hello world!',
-        footer: {
-          buttons: {
-            primary: okButton,
-            secondary: [cancelButton]
-          }
-        }
-      };
-      var myModal = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Modal.create(this.app, modalOptions);
-      myModal.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_2__.Modal.Action.OPEN);
-    }
-  }
 });
 
 /***/ }),
@@ -13129,12 +13129,100 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @shopify/app-bridge/actions */ "./node_modules/@shopify/app-bridge/actions/index.js");
+/* harmony import */ var _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Order"
+  name: "Order",
+  data: function data() {
+    return {};
+  },
+  created: function created() {},
+  methods: {
+    toastNotification: function toastNotification(message) {
+      var isError = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5000;
+      var toastNotification = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Toast.create(this.$root, {
+        message: message,
+        duration: duration,
+        isError: isError
+      });
+      toastNotification.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Toast.Action.SHOW);
+    },
+    button: function button() {
+      var myButton = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Button.create(this.$root, {
+        label: 'Save'
+      });
+      myButton.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Button.Action.CLICK);
+      console.log(myButton);
+    },
+    resource: function resource() {
+      var _this = this;
+
+      this.productPicker = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.ResourcePicker.create(this.$root, {
+        resourceType: _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.ResourcePicker.ResourceType.Product
+      });
+      this.productPicker.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.ResourcePicker.Action.OPEN);
+      console.log(this.productPicker);
+      this.productPicker.subscribe(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.ResourcePicker.Action.SELECT, function (selectPayload) {
+        _this.modal();
+
+        _this.selected = selectPayload.selection;
+      });
+    },
+    modal: function modal() {
+      var _this2 = this;
+
+      var okButton = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Button.create(this.$root, {
+        label: 'Order Product'
+      });
+      okButton.subscribe(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Button.Action.CLICK, function () {
+        _this2.createOrder();
+      });
+      var cancelButton = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Button.create(this.$root, {
+        label: 'Cancel'
+      });
+      cancelButton.subscribe(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Button.Action.CLICK, function () {
+        _this2.myModal.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Modal.Action.CLOSE);
+      });
+      var modalOptions = {
+        title: 'Sure want to order',
+        message: 'Please confirm your order',
+        footer: {
+          buttons: {
+            primary: okButton,
+            secondary: [cancelButton]
+          }
+        }
+      };
+      this.myModal = _shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Modal.create(this.$root, modalOptions);
+      this.myModal.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Modal.Action.OPEN);
+    },
+    createOrder: function createOrder() {
+      var _this3 = this;
+
+      this.myModal.dispatch(_shopify_app_bridge_actions__WEBPACK_IMPORTED_MODULE_0__.Modal.Action.CLOSE);
+
+      try {
+        this.axios.post('api/order ', this.selected).then(function (res) {
+          if (res.data === 'order created successfully') {
+            _this3.toastNotification(res.data);
+          }
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -13246,8 +13334,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
-var routes = [// {path: '/', redirect: '/home'},
-{
+var routes = [{
+  path: '/',
+  redirect: '/home'
+}, {
   path: '/',
   name: 'master',
   component: (__webpack_require__(/*! ../layouts/Master */ "./resources/vue/layouts/Master.vue")["default"]),
@@ -39942,7 +40032,12 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("hello from order")])
+  return _c(
+    "p-page",
+    { attrs: { title: "Order page" } },
+    [_c("PButton", { on: { click: _vm.resource } }, [_vm._v("Create Order")])],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

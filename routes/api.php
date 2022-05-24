@@ -26,4 +26,7 @@ Route::post('product/update',[ProductController::class,'update']);
 Route::post('products/filter',[ProductController::class,'filter']);
 Route::post('product/create',[ProductController::class,'create']);
 Route::resource('order',OrderController::class);
+Route::resource('customer',\App\Http\Controllers\CustomerController::class);
 
+Route::post('customer/filter',[\App\Http\Controllers\CustomerController::class,'filter']);
+Route::post('customer/import',[\App\Http\Controllers\CustomerController::class,'import']);

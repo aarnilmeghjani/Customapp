@@ -577,6 +577,7 @@ class ComposerStaticInitedc0fa394128a9398766a9111ac88b3d
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\CheckTest' => __DIR__ . '/../..' . '/app/Console/Commands/CheckTest.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
@@ -593,8 +594,10 @@ class ComposerStaticInitedc0fa394128a9398766a9111ac88b3d
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\ProductRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProductRequest.php',
         'App\\Jobs\\OrdersCreateJob' => __DIR__ . '/../..' . '/app/Jobs/OrdersCreateJob.php',
+        'App\\Jobs\\OrdersFulfilledJob' => __DIR__ . '/../..' . '/app/Jobs/OrdersFulfilledJob.php',
         'App\\Models\\Order' => __DIR__ . '/../..' . '/app/Models/Order.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\Models\\customer' => __DIR__ . '/../..' . '/app/Models/customer.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

@@ -53,8 +53,9 @@ class OrdersCreateJob implements ShouldQueue
 
         // Do what you wish with the data
         // Access domain name as $this->shopDomain->toNative()
-//        \Log::info($this->shopDomain);
+        \Log::info($this->shopDomain);
 //        \Log::info(json_encode($this->data,JSON_PRETTY_PRINT));
+
 
         $item= sizeof($this->data->line_items);
 

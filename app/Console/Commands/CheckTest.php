@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\customer;
 use App\Models\Order;
 use Illuminate\Console\Command;
 
@@ -38,10 +39,12 @@ class CheckTest extends Command
      */
     public function handle()
     {
-        $orderfulfil =Order::where('order_id','4578960474311')->get();
-
-        $orderfulfil[0]->fulfillment_status ='fulfilled';
-        $orderfulfil[0]->save();
+        $customer = new customer;
+        $customer->name = 'name';
+        $customer->email = 'aarnil@hulkapps.com';
+        $customer->phone = 8488098511;
+        $customer->address = 'surat';
+        $customer->save();
         return 0;
     }
 }

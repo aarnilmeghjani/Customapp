@@ -12537,95 +12537,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     }))();
-  } // async mounted() {
-  //     this.$root.$toast = this.toastNotification;
-  // },
-  //
-  // created() {
-  //
-  //     // this.toastNotification('product created');
-  //     // this.button();
-  //     // this.resource();
-  //
-  //
-  //
-  // },
-  // watch: {
-  //     $route(to, from) {
-  //         const history = History.create(this.$root);
-  //         history.dispatch(History.Action.PUSH, to.path);
-  //
-  //
-  //     }
-  // },
-  // methods:{
-  //     toastNotification(message, isError = false, duration = 5000) {
-  //         const toastNotification = Toast.create(this.$root, {
-  //             message,
-  //             duration,
-  //             isError,
-  //         });
-  //         toastNotification.dispatch(Toast.Action.SHOW);
-  //     },
-  //     button(){
-  //         const myButton = Button.create(this.$root, {
-  //             label: 'Save'
-  //         });
-  //         myButton.dispatch(Button.Action.CLICK);
-  //         console.log(myButton);
-  //     },
-  //     resource(){
-  //         this.productPicker = ResourcePicker.create(this.$root, {
-  //             resourceType: ResourcePicker.ResourceType.Product,
-  //         });
-  //         this.productPicker.dispatch(ResourcePicker.Action.OPEN)
-  //         console.log(this.productPicker);
-  //         this.productPicker.subscribe(ResourcePicker.Action.SELECT,(selectPayload)=>{
-  //             this.modal();
-  //            this.selected = selectPayload.selection;
-  //         });
-  //
-  //     },
-  //     modal(){
-  //         const okButton = Button.create(this.$root, {label: 'Order Product'});
-  //         okButton.subscribe(Button.Action.CLICK, () => {
-  //             this.createOrder();
-  //
-  //         });
-  //         const cancelButton = Button.create(this.$root, {label: 'Cancel'});
-  //         cancelButton.subscribe(Button.Action.CLICK, () => {
-  //             this.myModal.dispatch(Modal.Action.CLOSE);
-  //         });
-  //
-  //         const modalOptions = {
-  //             title: 'Sure want to order',
-  //             message: 'Please confirm your order',
-  //             footer: {
-  //                 buttons: {
-  //                     primary: okButton,
-  //                     secondary: [cancelButton],
-  //                 },
-  //             },
-  //         };
-  //         this.myModal = Modal.create(this.$root, modalOptions);
-  //         this.myModal.dispatch(Modal.Action.OPEN);
-  //
-  //
-  //     },
-  //     createOrder() {
-  //         this.myModal.dispatch(Modal.Action.CLOSE);
-  //         try {
-  //             this.axios.post('api/order ', this.selected).then(res => {
-  //                 if (res.data === 'order created successfully') {
-  //                     this.toastNotification(res.data);
-  //                 }
-  //             })
-  //         } catch (e) {
-  //             console.log(e);
-  //         }
-  //     }
-  // }
-
+  }
 });
 
 /***/ }),
@@ -13109,11 +13021,396 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Customer"
+  name: "Customer",
+  data: function data() {
+    return {
+      PrimaryAction: {
+        content: "Add customer",
+        onAction: this.customerModal
+      },
+      customermodal: false,
+      deleteModal: false,
+      form: {
+        name: '',
+        email: '',
+        phone: '',
+        address: ''
+      },
+      editId: null,
+      editModal: false,
+      customers: [],
+      errors: {},
+      deleteId: null,
+      deleteModalData: [{
+        content: "Cancel",
+        onAction: this.changeDeleteModal
+      }, {
+        content: "Delete Customer",
+        destructive: true,
+        onAction: this.deleteCustomer
+      }],
+      editModalData: [{
+        content: "Cancel",
+        onAction: this.changeEditModal
+      }, {
+        content: "Update Product",
+        destructive: true,
+        onAction: this.updateProduct
+      }],
+      openImportModel: false,
+      importForm: {}
+    };
+  },
+  created: function created() {
+    this.getdata();
+  },
+  methods: {
+    changeDeleteModal: function changeDeleteModal() {
+      this.deleteModal = !this.deleteModal;
+    },
+    getdata: function getdata() {
+      var _this = this;
+
+      this.axios.get('/api/customer').then(function (res) {
+        console.log(res.data);
+        _this.customers = res.data;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    customerModal: function customerModal() {
+      this.form = {};
+      this.customermodal = !this.customermodal;
+    },
+    changeEditModal: function changeEditModal() {
+      this.editModal = !this.editModal;
+    },
+    doImport: function doImport() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var formData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                formData = new FormData();
+                formData.append('file', _this2.importForm.file);
+
+                _this2.axios.post('/api/customer/import', formData).then(function (res) {
+                  console.log(res.data);
+                });
+
+              case 3:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    createCustomer: function createCustomer() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _this3.axios.post('/api/customer', _this3.form);
+
+              case 3:
+                response = _context2.sent;
+
+                _this3.customers.push(response.data);
+
+                _this3.customerModal();
+
+                _this3.$pLoading.finish();
+
+                _this3.$pToast.open({
+                  message: 'customer add successfully'
+                });
+
+                _context2.next = 13;
+                break;
+
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](0);
+
+                if (_context2.t0.response.status === 422) {
+                  console.log(_context2.t0.response);
+                  _this3.errors = {};
+
+                  if (_context2.t0.response.data.name) {
+                    _this3.errors.name = _context2.t0.response.data.name.join();
+                  }
+
+                  if (_context2.t0.response.data.email) {
+                    _this3.errors.email = _context2.t0.response.data.email.join();
+                  }
+
+                  if (_context2.t0.response.data.phone) {
+                    _this3.errors.phone = _context2.t0.response.data.phone.join();
+                  }
+
+                  if (_context2.t0.response.data.address) {
+                    _this3.errors.address = _context2.t0.response.data.address.join();
+                  }
+                }
+
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 10]]);
+      }))();
+    },
+    deleteCustomerId: function deleteCustomerId(id) {
+      this.deleteModal = true;
+      this.deleteId = id;
+    },
+    deleteCustomer: function deleteCustomer() {
+      var _this4 = this;
+
+      this.axios["delete"]('/api/customer/' + this.deleteId).then(function (res) {
+        console.log(res);
+        _this4.deleteModal = false;
+
+        if (res.data === 'success') {
+          _this4.$pToast.open({
+            message: 'customer delete successfully'
+          });
+        }
+
+        _this4.getdata();
+      });
+    },
+    editProduct: function editProduct(item) {
+      this.form.name = item.name;
+      this.form.email = item.email;
+      this.form.phone = item.phone;
+      this.form.address = item.address;
+      this.editId = item.id;
+      this.editModal = true;
+    },
+    updateProduct: function updateProduct() {
+      var _this5 = this;
+
+      this.form.id = this.editId;
+      this.axios.put('/api/customer/' + this.editId, this.form).then(function (res) {
+        console.log(res.data);
+
+        _this5.getdata();
+      });
+    },
+    searchFilter: function searchFilter(value) {
+      var _this6 = this;
+
+      if (value) {
+        var data = {
+          'text': value
+        };
+        this.axios.post('/api/customer/filter', data).then(function (response) {
+          console.log(response);
+          _this6.customers = response.data;
+        });
+      } else {
+        this.getdata();
+      }
+    },
+    importcustomerdata: function importcustomerdata() {
+      this.openImportModel = true;
+    },
+    exportcustomerdata: function exportcustomerdata() {},
+    onSelectFile: function onSelectFile(e) {
+      var file = e.target.files[0];
+      if (!e.target.files.length) return;
+      this.importForm.file = file;
+      console.log(this.importForm.file);
+    }
+  }
 });
 
 /***/ }),
@@ -39162,7 +39459,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Customer_vue_vue_type_template_id_14a9441a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Customer.vue?vue&type=template&id=14a9441a&scoped=true& */ "./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&scoped=true&");
+/* harmony import */ var _Customer_vue_vue_type_template_id_14a9441a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Customer.vue?vue&type=template&id=14a9441a& */ "./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&");
 /* harmony import */ var _Customer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Customer.vue?vue&type=script&lang=js& */ "./resources/vue/pages/customer/Customer.vue?vue&type=script&lang=js&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -39174,11 +39471,11 @@ __webpack_require__.r(__webpack_exports__);
 ;
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _Customer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Customer_vue_vue_type_template_id_14a9441a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _Customer_vue_vue_type_template_id_14a9441a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _Customer_vue_vue_type_template_id_14a9441a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Customer_vue_vue_type_template_id_14a9441a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "14a9441a",
+  null,
   null
   
 )
@@ -39382,19 +39679,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&scoped=true&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&scoped=true& ***!
-  \**********************************************************************************************/
+/***/ "./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&":
+/*!**********************************************************************************!*\
+  !*** ./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a& ***!
+  \**********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Customer_vue_vue_type_template_id_14a9441a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Customer_vue_vue_type_template_id_14a9441a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Customer_vue_vue_type_template_id_14a9441a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Customer_vue_vue_type_template_id_14a9441a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Customer_vue_vue_type_template_id_14a9441a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Customer.vue?vue&type=template&id=14a9441a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Customer_vue_vue_type_template_id_14a9441a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Customer.vue?vue&type=template&id=14a9441a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&");
 
 
 /***/ }),
@@ -39991,10 +40288,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&scoped=true&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&scoped=true& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/vue/pages/customer/Customer.vue?vue&type=template&id=14a9441a& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40007,7 +40304,399 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("hello from customer")])
+  return _c(
+    "PPage",
+    {
+      attrs: {
+        title: "Customer",
+        "full-width": "",
+        primaryAction: _vm.PrimaryAction,
+        secondaryActions: [
+          {
+            content: "Import",
+            onAction: _vm.importcustomerdata,
+            icon: "ImportMinor",
+          },
+          {
+            content: "Export",
+            onAction: _vm.exportcustomerdata,
+            icon: "ExportMinor",
+          },
+        ],
+      },
+    },
+    [
+      _c(
+        "PCard",
+        { attrs: { sectioned: "" } },
+        [
+          _c(
+            "PDataTable",
+            {
+              attrs: {
+                resourceName: { singular: "Customer", plural: "Customers" },
+                headings: [
+                  {
+                    content: "Customer",
+                    value: "name",
+                    type: "text",
+                    width: "30%",
+                  },
+                  {
+                    content: "Email",
+                    value: "email",
+                    type: "email",
+                  },
+                  {
+                    content: "Phone Number",
+                    value: "phone",
+                    type: "text",
+                  },
+                  {
+                    content: "Address",
+                    value: "address",
+                    type: "text",
+                  },
+                  {
+                    content: "Actions",
+                    value: "actions",
+                    type: "text",
+                    sortable: false,
+                  },
+                ],
+                rows: _vm.customers,
+                hasPagination: true,
+                pagination: {
+                  hasPrevious: true,
+                  hasNext: true,
+                  onNext: function () {
+                    _vm.alert("Next")
+                  },
+                  onPrevious: function () {
+                    _vm.alert("Previous")
+                  },
+                },
+              },
+              on: { "input-filter-changed": _vm.searchFilter },
+              scopedSlots: _vm._u([
+                {
+                  key: "item",
+                  fn: function (ref) {
+                    var item = ref.item
+                    return [
+                      _c(
+                        "PDataTableRow",
+                        [
+                          _c("PDataTableCol", { attrs: { firstColumn: "" } }, [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(item.name) +
+                                "\n                    "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("PDataTableCol", [_vm._v(_vm._s(item.email))]),
+                          _vm._v(" "),
+                          _c("PDataTableCol", [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(item.phone) +
+                                "\n                    "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("PDataTableCol", [_vm._v(_vm._s(item.address))]),
+                          _vm._v(" "),
+                          _c(
+                            "PDataTableCol",
+                            [
+                              _c(
+                                "PStack",
+                                [
+                                  _c(
+                                    "PStackItem",
+                                    [
+                                      _c("PIcon", {
+                                        attrs: { source: "EditMinor" },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.editProduct(item)
+                                          },
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "PStackItem",
+                                    [
+                                      _c("PIcon", {
+                                        attrs: {
+                                          source: "DeleteMinor",
+                                          color: "critical",
+                                        },
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.deleteCustomerId(item.id)
+                                          },
+                                        },
+                                      }),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ]
+                  },
+                },
+              ]),
+            },
+            [
+              _vm._v(" "),
+              _c("PButtonGroup", {
+                attrs: { slot: "filter", segmented: "" },
+                slot: "filter",
+              }),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "PModal",
+        {
+          attrs: {
+            open: _vm.customermodal,
+            sectioned: "",
+            primaryAction: {
+              content: "Save Customer",
+              onAction: _vm.createCustomer,
+            },
+            secondaryActions: [
+              { content: "Cancel", onAction: _vm.customerModal },
+            ],
+            title: "Enter Customer Details",
+          },
+          on: { close: _vm.customerModal },
+        },
+        [
+          _c(
+            "PFormLayout",
+            [
+              _c("PTextField", {
+                attrs: {
+                  label: "Full name",
+                  error: _vm.errors.name ? _vm.errors.name : null,
+                },
+                model: {
+                  value: _vm.form.name,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.form, "name", $$v)
+                  },
+                  expression: "form.name",
+                },
+              }),
+              _vm._v(" "),
+              _c("PTextField", {
+                attrs: {
+                  label: "Email",
+                  type: "email",
+                  error: _vm.errors.email ? _vm.errors.email : null,
+                },
+                model: {
+                  value: _vm.form.email,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.form, "email", $$v)
+                  },
+                  expression: "form.email",
+                },
+              }),
+              _vm._v(" "),
+              _c("PTextField", {
+                attrs: {
+                  label: "Phone number",
+                  error: _vm.errors.phone ? _vm.errors.phone : null,
+                },
+                model: {
+                  value: _vm.form.phone,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.form, "phone", $$v)
+                  },
+                  expression: "form.phone",
+                },
+              }),
+              _vm._v(" "),
+              _c("PTextField", {
+                attrs: {
+                  label: "Address",
+                  error: _vm.errors.address ? _vm.errors.address : null,
+                },
+                model: {
+                  value: _vm.form.address,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.form, "address", $$v)
+                  },
+                  expression: "form.address",
+                },
+              }),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "PModal",
+        {
+          attrs: {
+            open: _vm.deleteModal,
+            sectioned: "",
+            secondaryActions: _vm.deleteModalData,
+            title: "Alert!",
+          },
+          on: { close: _vm.changeDeleteModal },
+        },
+        [
+          _c("PHeading", { attrs: { element: "h1" } }, [
+            _vm._v("Are you sure you want to delete customer?"),
+          ]),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "PModal",
+        {
+          attrs: {
+            open: _vm.editModal,
+            sectioned: "",
+            secondaryActions: _vm.editModalData,
+            title: "Edit Product",
+          },
+          on: { close: _vm.changeEditModal },
+        },
+        [
+          _c(
+            "PFormLayout",
+            [
+              _c("PTextField", {
+                attrs: { label: "Customer name " },
+                model: {
+                  value: _vm.form.name,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.form, "name", $$v)
+                  },
+                  expression: "form.name",
+                },
+              }),
+              _vm._v(" "),
+              _c("PTextField", {
+                attrs: { label: "Customer email " },
+                model: {
+                  value: _vm.form.email,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.form, "email", $$v)
+                  },
+                  expression: "form.email",
+                },
+              }),
+              _vm._v(" "),
+              _c("PTextField", {
+                attrs: { label: "Customer phone " },
+                model: {
+                  value: _vm.form.phone,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.form, "phone", $$v)
+                  },
+                  expression: "form.phone",
+                },
+              }),
+              _vm._v(" "),
+              _c("PTextField", {
+                attrs: { label: "Customer address " },
+                model: {
+                  value: _vm.form.address,
+                  callback: function ($$v) {
+                    _vm.$set(_vm.form, "address", $$v)
+                  },
+                  expression: "form.address",
+                },
+              }),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "PModal",
+        {
+          attrs: {
+            sectioned: "",
+            title: "Import Repair Centers",
+            primaryAction: { content: "Save", onAction: _vm.doImport },
+            secondaryActions: [
+              {
+                content: "Close",
+                onAction: function () {
+                  _vm.openImportModel = false
+                },
+              },
+            ],
+            open: _vm.openImportModel,
+          },
+          on: {
+            close: function ($event) {
+              _vm.openImportModel = !_vm.openImportModel
+            },
+          },
+        },
+        [
+          _c(
+            "PFormLayout",
+            [
+              _c(
+                "PStack",
+                { attrs: { vertical: "" } },
+                [
+                  _c("PStackItem", [
+                    _c("input", {
+                      attrs: {
+                        type: "file",
+                        name: "import_file",
+                        accept: ".csv",
+                      },
+                      on: {
+                        change: function ($event) {
+                          return _vm.onSelectFile($event)
+                        },
+                      },
+                    }),
+                  ]),
+                ],
+                1
+              ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

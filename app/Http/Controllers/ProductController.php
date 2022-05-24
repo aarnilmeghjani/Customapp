@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-            $user = User::where('name', 'demo-aarnil-meghjani.myshopify.com')->first();
+        $user = User::where('name', 'demo-aarnil-meghjani.myshopify.com')->first();
 
         $next = $request->next;
         $previous = $request->previous;
@@ -212,8 +212,6 @@ class ProductController extends Controller
 //    }
 
 
-
-
     public function create(Request $request)
     {
 
@@ -229,7 +227,7 @@ class ProductController extends Controller
         } else {
 
             $user = User::where("name", "=", "demo-aarnil-meghjani.myshopify.com")->first();//fixed its comes from middleware
-        $mutation = 'mutation productCreate($input: ProductInput!) {
+            $mutation = 'mutation productCreate($input: ProductInput!) {
             productCreate(input:$input)
              {
                 product
@@ -240,15 +238,14 @@ class ProductController extends Controller
         }';
 
 
-
         }
         $variables = [
             'input' => [
                 'title' => $request->title,
                 'descriptionHtml' => $request->description,
                 'vendor' => $request->vendor,
-                'variants'=>[
-                    'price'=> $request->price,
+                'variants' => [
+                    'price' => $request->price,
                 ]
             ]
         ];
@@ -256,8 +253,6 @@ class ProductController extends Controller
 
         return Response('success', 200);
     }
-
-
 
 
 }

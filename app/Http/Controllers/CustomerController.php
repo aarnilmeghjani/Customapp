@@ -2,22 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\Exportdata;
 use App\Models\customer;
 use App\Models\Page;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Support\Jsonable;
 use function PHPUnit\Framework\returnArgument;
+use App\Jobs\Importcustomerdata;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         $data = customer::all();
+
+//        return Customer::paginate(2);
 
         return response($data, 200);
     }
@@ -25,7 +34,7 @@ class CustomerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function create()
     {
@@ -35,8 +44,8 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @param Request $request
+     * @return Application|ResponseFactory|Response
      */
     public function store(Request $request)
     {
@@ -67,8 +76,8 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\customer $customer
-     * @return \Illuminate\Http\Response
+     * @param customer $customer
+     * @return void
      */
     public function show(customer $customer)
     {
@@ -78,8 +87,8 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\customer $customer
-     * @return \Illuminate\Http\Response
+     * @param customer $customer
+     * @return void
      */
     public function edit(customer $customer)
     {
@@ -89,9 +98,9 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\customer $customer
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param customer $customer
+     * @return Response
      */
     public function update(Request $request, customer $customer)
     {
@@ -105,8 +114,8 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\customer $customer
-     * @return \Illuminate\Http\Response
+     * @param customer $customer
+     * @return Response
      */
     public function destroy(customer $customer)
     {
@@ -116,9 +125,31 @@ class CustomerController extends Controller
 
     public function filter(Request $request)
     {
+        $text = $request->text;
+        $status = $request->status;
+
+        $status1 = null;
+        $status2 = null;
+
+        if (isset($status)) {
+            if (sizeof($status) === 1) {
+                $status1 = $status[0];
+            } else {
+                $status1 = $status[0];
+                $status2 = $status[1];
+            }
+
+            $data=customer::where('status',$status1)->
+                orwhere('status',$status2)
+                ->get();
 
 
-        $data = customer::where('name', 'LIKE', '%' . $request->text . '%')->orWhere('email', 'LIKE', '%' . $request->text . '%')->get();
+        }
+        if (isset($text)){
+
+            $data = customer::where('name', 'LIKE', '%' . $text . '%')->orWhere('email', 'LIKE', '%' . $text . '%')->get();
+
+        }
 
 
         return response($data, 200);
@@ -128,6 +159,7 @@ class CustomerController extends Controller
     public function import(Request $request)
     {
         $file = $request->file('file');
+        $email=$request->input('email');
 
 
         // File Details
@@ -168,11 +200,6 @@ class CustomerController extends Controller
 
                     $num = count($filedata);
 
-                    // Skip first row (Remove below comment if you want to skip the first row)
-                    /*if($i == 0){
-                       $i++;
-                       continue;
-                    }*/
                     for ($c = 0; $c < $num; $c++) {
 
                         $importData_arr[$i][] = $filedata [$c];
@@ -182,19 +209,22 @@ class CustomerController extends Controller
                 fclose($file);
 
                 // Insert to MySQL database
-                foreach (array_slice($importData_arr,1) as $importData) {
-
-                    $insertData = array(
-                        "name" => $importData[1],
-                        "email" => $importData[2],
-                        "phone" => $importData[3],
-                        "address" => $importData[4]);
-
-                customer::insert($insertData);
 
 
+                //dispatch through in jobs
+                Importcustomerdata::dispatch($importData_arr,$email);
 
-                }
+//                foreach (array_slice($importData_arr,1) as $importData) {
+//
+//                    $insertData = array(
+//                        "name" => $importData[1],
+//                        "email" => $importData[2],
+//                        "phone" => $importData[3],
+//                        "address" => $importData[4]);
+//
+//                customer::insert($insertData);
+//
+//                }
 
                 return response('successfully import', 200);
             } else {
@@ -205,9 +235,39 @@ class CustomerController extends Controller
         }
 
     }
+    public function export(Request $request){
+
+
+        $email=$request->email;
+
+        Exportdata::dispatch($email);
+       return response('success',200);
+    }
+    public function statusFilter(Request $request){
 
 
 
+         $data = customer::orderBy('id',$request->order[0])->get();
 
 
+        return response($data,200);
+
+
+    }
+    public function  datefilter(Request $request){
+
+
+        $startDate= $request->startDate;
+        $endDate =$request->endDate;
+        dd($startDate);
+
+        $startDate = Carbon::createFromFormat('d/m/Y', '01/01/2021');
+        $endDate = Carbon::createFromFormat('d/m/Y', '06/01/2021');
+        $data = customer::select('id', 'name', 'email','phone','address', 'created_at')
+            ->where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate)
+            ->get();
+
+        return response($data,200);
+    }
 }

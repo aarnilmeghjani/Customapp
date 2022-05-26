@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\customer;
 use App\Models\Order;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class CheckTest extends Command
 {
@@ -39,12 +40,28 @@ class CheckTest extends Command
      */
     public function handle()
     {
-        $customer = new customer;
-        $customer->name = 'name';
-        $customer->email = 'aarnil@hulkapps.com';
-        $customer->phone = 8488098511;
-        $customer->address = 'surat';
-        $customer->save();
-        return 0;
+
+
+//        DB::beginTransaction();
+
+        try {
+
+            $customer = new customer;
+            $customer->name = 'kirtan';
+            $customer->email = 'kirtan@gmail.com';
+            $customer->phone = '8956234512';
+            $customer->address = 'vadodara';
+            $customer->save();
+
+
+
+            DB::commit();
+            // all good
+        } catch (\Exception $e) {
+            dd('dukfvbhds');
+
+            DB::rollback();
+            dd('dukfvbhds');
+        }
     }
 }

@@ -30,3 +30,6 @@ Route::resource('customer',\App\Http\Controllers\CustomerController::class);
 
 Route::post('customer/filter',[\App\Http\Controllers\CustomerController::class,'filter']);
 Route::post('customer/import',[\App\Http\Controllers\CustomerController::class,'import']);
+Route::post('customer/export',[\App\Http\Controllers\CustomerController::class,'export']);
+Route::post('customer/statusFilter',[\App\Http\Controllers\CustomerController::class,'statusFilter']);
+Route::post('customer/datefilter',[\App\Http\Controllers\CustomerController::class,'datefilter']);

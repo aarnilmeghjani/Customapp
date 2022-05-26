@@ -13196,14 +13196,114 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Customer",
   data: function data() {
     return {
+      filterOptions: [{
+        label: 'Active',
+        value: 0
+      }, {
+        label: 'Draft',
+        value: 1
+      }],
       PrimaryAction: {
         content: "Add customer",
         onAction: this.customerModal
       },
+      openFilter: false,
+      active: false,
+      openExportModel: false,
       customermodal: false,
       deleteModal: false,
       form: {
@@ -13234,22 +13334,74 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         onAction: this.updateProduct
       }],
       openImportModel: false,
-      importForm: {}
+      importForm: {},
+      export_email: '',
+      statusSelected: [],
+      selected: []
     };
   },
   created: function created() {
     this.getdata();
   },
   methods: {
+    onActivate: function onActivate($event) {
+      var _this = this;
+
+      if (this.statusSelected.indexOf($event[0]) === -1) {
+        this.statusSelected.push($event[0]);
+      } else {
+        this.statusSelected = [];
+        this.statusSelected.push($event[0]);
+      }
+
+      if ($event.length === 0) {
+        this.statusSelected = [];
+      }
+
+      if (this.statusSelected.length > 0) {
+        var status = {
+          'status': this.statusSelected
+        };
+        this.axios.post('/api/customer/filter', status).then(function (response) {
+          _this.customers = response.data;
+        });
+      } else {
+        return this.getdata();
+      }
+    },
+    filter: function filter() {
+      this.openFilter = !this.openFilter;
+    },
+    filterChange: function filterChange($event) {
+      var _this2 = this;
+
+      if ($event.length > 0) {
+        console.log('fdsfgds');
+        var order = {
+          'order': $event
+        };
+        this.axios.post('/api/customer/statusFilter', order).then(function (res) {
+          console.log(res.data);
+          console.log(res.data);
+          _this2.customers = res.data;
+        });
+      } else {
+        return this.getdata();
+      }
+
+      console.log($event);
+    },
+    filterbutton: function filterbutton() {
+      this.active = !this.active;
+    },
     changeDeleteModal: function changeDeleteModal() {
       this.deleteModal = !this.deleteModal;
     },
     getdata: function getdata() {
-      var _this = this;
+      var _this3 = this;
 
       this.axios.get('/api/customer').then(function (res) {
-        console.log(res.data);
-        _this.customers = res.data;
+        _this3.customers = res.data;
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -13262,7 +13414,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editModal = !this.editModal;
     },
     doImport: function doImport() {
-      var _this2 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var formData;
@@ -13271,13 +13423,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 formData = new FormData();
-                formData.append('file', _this2.importForm.file);
-
-                _this2.axios.post('/api/customer/import', formData).then(function (res) {
+                formData.append('file', _this4.importForm.file);
+                formData.append('email', _this4.importForm.email);
+                _context.next = 5;
+                return _this4.axios.post('/api/customer/import', formData).then(function (res) {
+                  _this4.openImportModel = false;
                   console.log(res.data);
                 });
 
-              case 3:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -13285,66 +13439,90 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    createCustomer: function createCustomer() {
-      var _this3 = this;
+    doExport: function doExport() {
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return _this3.axios.post('/api/customer', _this3.form);
+                _context2.next = 2;
+                return _this5.axios.post('/api/customer/export', {
+                  'email': _this5.export_email
+                }).then(function (res) {
+                  _this5.openExportModel = false;
+                  console.log(res.data);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    createCustomer: function createCustomer() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return _this6.axios.post('/api/customer', _this6.form);
 
               case 3:
-                response = _context2.sent;
+                response = _context3.sent;
 
-                _this3.customers.push(response.data);
+                _this6.customers.push(response.data);
 
-                _this3.customerModal();
+                _this6.customerModal();
 
-                _this3.$pLoading.finish();
+                _this6.$pLoading.finish();
 
-                _this3.$pToast.open({
+                _this6.$pToast.open({
                   message: 'customer add successfully'
                 });
 
-                _context2.next = 13;
+                _context3.next = 13;
                 break;
 
               case 10:
-                _context2.prev = 10;
-                _context2.t0 = _context2["catch"](0);
+                _context3.prev = 10;
+                _context3.t0 = _context3["catch"](0);
 
-                if (_context2.t0.response.status === 422) {
-                  console.log(_context2.t0.response);
-                  _this3.errors = {};
+                if (_context3.t0.response.status === 422) {
+                  console.log(_context3.t0.response);
+                  _this6.errors = {};
 
-                  if (_context2.t0.response.data.name) {
-                    _this3.errors.name = _context2.t0.response.data.name.join();
+                  if (_context3.t0.response.data.name) {
+                    _this6.errors.name = _context3.t0.response.data.name.join();
                   }
 
-                  if (_context2.t0.response.data.email) {
-                    _this3.errors.email = _context2.t0.response.data.email.join();
+                  if (_context3.t0.response.data.email) {
+                    _this6.errors.email = _context3.t0.response.data.email.join();
                   }
 
-                  if (_context2.t0.response.data.phone) {
-                    _this3.errors.phone = _context2.t0.response.data.phone.join();
+                  if (_context3.t0.response.data.phone) {
+                    _this6.errors.phone = _context3.t0.response.data.phone.join();
                   }
 
-                  if (_context2.t0.response.data.address) {
-                    _this3.errors.address = _context2.t0.response.data.address.join();
+                  if (_context3.t0.response.data.address) {
+                    _this6.errors.address = _context3.t0.response.data.address.join();
                   }
                 }
 
               case 13:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, null, [[0, 10]]);
+        }, _callee3, null, [[0, 10]]);
       }))();
     },
     deleteCustomerId: function deleteCustomerId(id) {
@@ -13352,19 +13530,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.deleteId = id;
     },
     deleteCustomer: function deleteCustomer() {
-      var _this4 = this;
+      var _this7 = this;
 
       this.axios["delete"]('/api/customer/' + this.deleteId).then(function (res) {
         console.log(res);
-        _this4.deleteModal = false;
+        _this7.deleteModal = false;
 
         if (res.data === 'success') {
-          _this4.$pToast.open({
+          _this7.$pToast.open({
             message: 'customer delete successfully'
           });
         }
 
-        _this4.getdata();
+        _this7.getdata();
       });
     },
     editProduct: function editProduct(item) {
@@ -13376,17 +13554,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.editModal = true;
     },
     updateProduct: function updateProduct() {
-      var _this5 = this;
+      var _this8 = this;
 
       this.form.id = this.editId;
       this.axios.put('/api/customer/' + this.editId, this.form).then(function (res) {
         console.log(res.data);
 
-        _this5.getdata();
+        _this8.getdata();
       });
     },
     searchFilter: function searchFilter(value) {
-      var _this6 = this;
+      var _this9 = this;
 
       if (value) {
         var data = {
@@ -13394,7 +13572,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         };
         this.axios.post('/api/customer/filter', data).then(function (response) {
           console.log(response);
-          _this6.customers = response.data;
+          _this9.customers = response.data;
         });
       } else {
         this.getdata();
@@ -13403,12 +13581,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     importcustomerdata: function importcustomerdata() {
       this.openImportModel = true;
     },
-    exportcustomerdata: function exportcustomerdata() {},
+    exportcustomerdata: function exportcustomerdata() {
+      this.openExportModel = true;
+    },
     onSelectFile: function onSelectFile(e) {
       var file = e.target.files[0];
       if (!e.target.files.length) return;
       this.importForm.file = file;
       console.log(this.importForm.file);
+    },
+    datefilter: function datefilter($event) {
+      var data = $event;
+      this.axios.post('/api/customer/datefilter', data).then(function (res) {
+        console.log(res);
+      });
     }
   }
 });
@@ -40358,6 +40544,11 @@ var render = function () {
                     type: "text",
                   },
                   {
+                    content: "Status",
+                    value: "status",
+                    type: "text",
+                  },
+                  {
                     content: "Actions",
                     value: "actions",
                     type: "text",
@@ -40365,17 +40556,6 @@ var render = function () {
                   },
                 ],
                 rows: _vm.customers,
-                hasPagination: true,
-                pagination: {
-                  hasPrevious: true,
-                  hasNext: true,
-                  onNext: function () {
-                    _vm.alert("Next")
-                  },
-                  onPrevious: function () {
-                    _vm.alert("Previous")
-                  },
-                },
               },
               on: { "input-filter-changed": _vm.searchFilter },
               scopedSlots: _vm._u([
@@ -40406,6 +40586,45 @@ var render = function () {
                           ]),
                           _vm._v(" "),
                           _c("PDataTableCol", [_vm._v(_vm._s(item.address))]),
+                          _vm._v(" "),
+                          _c(
+                            "PDataTableCol",
+                            [
+                              item.status === 0
+                                ? _c(
+                                    "PBadge",
+                                    {
+                                      attrs: {
+                                        status: "success",
+                                        progress: "complete",
+                                        size: "medium",
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            Active\n                        "
+                                      ),
+                                    ]
+                                  )
+                                : _c(
+                                    "PBadge",
+                                    {
+                                      attrs: {
+                                        status: "info",
+                                        progress: "partiallyComplete",
+                                        color: "red",
+                                        size: "medium",
+                                      },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            Inactive\n                        "
+                                      ),
+                                    ]
+                                  ),
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c(
                             "PDataTableCol",
@@ -40461,10 +40680,122 @@ var render = function () {
             },
             [
               _vm._v(" "),
-              _c("PButtonGroup", {
-                attrs: { slot: "filter", segmented: "" },
-                slot: "filter",
-              }),
+              _c(
+                "PButtonGroup",
+                { attrs: { slot: "filter", segmented: "" }, slot: "filter" },
+                [
+                  _c(
+                    "PPopover",
+                    {
+                      attrs: {
+                        id: "popover_1",
+                        active: _vm.active,
+                        "preferred-alignment": "right",
+                        fullWidth: "",
+                      },
+                    },
+                    [
+                      _c(
+                        "PButton",
+                        {
+                          attrs: {
+                            slot: "activator",
+                            disclosure: _vm.active ? "up" : "down",
+                          },
+                          on: { click: _vm.filterbutton },
+                          slot: "activator",
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Filter Options\n                    "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("POptionList", {
+                        attrs: {
+                          slot: "content",
+                          selected: _vm.selected,
+                          options: [
+                            { label: "Lasted Customer", value: "asc" },
+                            { label: "Old Customer ", value: "DESC" },
+                          ],
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.filterChange($event)
+                          },
+                        },
+                        slot: "content",
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "PPopover",
+                    {
+                      attrs: {
+                        id: "popover_2",
+                        active: _vm.openFilter,
+                        "preferred-alignment": "right",
+                        fullWidth: "",
+                      },
+                    },
+                    [
+                      _c(
+                        "PButton",
+                        {
+                          attrs: {
+                            slot: "activator",
+                            disclosure: _vm.openFilter ? "up" : "down",
+                          },
+                          on: { click: _vm.filter },
+                          slot: "activator",
+                        },
+                        [
+                          _vm._v(
+                            "\n                        Status\n                    "
+                          ),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("POptionList", {
+                        attrs: {
+                          slot: "content",
+                          allowMultiple: "",
+                          selected: _vm.statusSelected,
+                          options: _vm.filterOptions,
+                        },
+                        on: {
+                          change: function ($event) {
+                            return _vm.onActivate($event)
+                          },
+                        },
+                        slot: "content",
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("PDatePicker", {
+                    attrs: {
+                      button: "",
+                      id: "pDatePicker",
+                      singleDatePicker: false,
+                      placeholder: "Select Date",
+                      value: null,
+                      opens: "left",
+                    },
+                    on: {
+                      change: function ($event) {
+                        return _vm.datefilter($event)
+                      },
+                    },
+                  }),
+                ],
+                1
+              ),
             ],
             1
           ),
@@ -40685,9 +41016,112 @@ var render = function () {
                       },
                     }),
                   ]),
+                  _vm._v(" "),
+                  _c(
+                    "PStackItem",
+                    [
+                      _c(
+                        "PTextField",
+                        {
+                          attrs: {
+                            type: "email",
+                            id: "email",
+                            label: "Email",
+                            placeholder: "Email",
+                          },
+                          model: {
+                            value: _vm.importForm.email,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.importForm, "email", $$v)
+                            },
+                            expression: "importForm.email",
+                          },
+                        },
+                        [
+                          _c("PIcon", {
+                            attrs: { slot: "prefix", source: "EmailMajor" },
+                            slot: "prefix",
+                          }),
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("PTextContainer", [
+                        _vm._v(
+                          "\n                        We will send you email notification on the above email once import process will complete.\n                    "
+                        ),
+                      ]),
+                    ],
+                    1
+                  ),
                 ],
                 1
               ),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "PModal",
+        {
+          attrs: {
+            sectioned: "",
+            title: "Export Repair Centers",
+            primaryAction: { content: "Save", onAction: _vm.doExport },
+            secondaryActions: [
+              {
+                content: "Close",
+                onAction: function () {
+                  _vm.openExportModel = false
+                },
+              },
+            ],
+            open: _vm.openExportModel,
+          },
+          on: {
+            close: function ($event) {
+              _vm.openExportModel = !_vm.openExportModel
+            },
+          },
+        },
+        [
+          _c(
+            "PFormLayout",
+            [
+              _c(
+                "PTextField",
+                {
+                  attrs: {
+                    type: "email",
+                    id: "export_email",
+                    label: "Email",
+                    placeholder: "Email",
+                  },
+                  model: {
+                    value: _vm.export_email,
+                    callback: function ($$v) {
+                      _vm.export_email = $$v
+                    },
+                    expression: "export_email",
+                  },
+                },
+                [
+                  _c("PIcon", {
+                    attrs: { slot: "prefix", source: "EmailMajor" },
+                    slot: "prefix",
+                  }),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("PTextContainer", [
+                _vm._v(
+                  "\n                We will send you email notification on the above email once export process will complete.\n            "
+                ),
+              ]),
             ],
             1
           ),
